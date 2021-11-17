@@ -12,12 +12,18 @@ typedef struct node {
 
 #define MAX 8
 
+/* funcion push */
 char * push(Node **front, Node **rear, int *count);
   void makeLiksToPush(Node **rear, Node **front, Node *newndode);
   void addContent(Node *n);
 
-//char * pop(Node *front, Node *rear, int *count);
+/* funcion pop */
+char * pop(Node **front, Node **rear, int *count);
 
+/* funcion listar */
 void printList(Node *front);
+
+/* menu */
+int runMenu(void);
 
 #endif
