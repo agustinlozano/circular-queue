@@ -1,18 +1,20 @@
 #include "cq.h"
 
-char * push(Node *front, Node *rear, int *count) {
+char * push(Node **front, Node **rear, int *count) {
   Node *newnode = NULL;
 
-  if (front == NULL && rear == NULL) {
+  if (*front == NULL && *rear == NULL) {
     printf("Se agrega el primer elemento\n");
 
     newnode = (Node *)malloc(sizeof(Node));
 
-    front = newnode;
-    rear = newnode;
-    makeLiksToPush(front, rear);
+    (*front) = newnode;
+    (*rear) = newnode;
 
-    addContent(rear);
+    (*front) -> next = (*rear);
+    makeLiksToPush(rear, newnode);
+
+    addContent(*rear);
 
     *count = *count + 1;
 
@@ -24,20 +26,24 @@ char * push(Node *front, Node *rear, int *count) {
 
     newnode = (Node *)malloc(sizeof(Node));
 
-    rear = newnode;
-    makeLiksToPush(front, rear);
+    (*rear) = newnode;
+    makeLiksToPush(rear, newnode);
 
-    addContent(rear);
+    addContent(*rear);
 
     *count = *count + 1;
   }
 
-  return rear->data;
+  printf("\nDireccion de memoria adentro: %p, %p\n", front, rear);
+
+  return (*rear)->data;
 }
 
-void makeLiksToPush(Node *front, Node *rear) {
-      front -> next = rear;
-      rear -> next = front;
+void makeLiksToPush(Node **rear, Node *newndode) {
+  Node *aux = NULL;
+
+  aux = (*rear);
+  aux -> next = newndode;
 }
 
 void addContent(Node *n) {
@@ -45,5 +51,5 @@ void addContent(Node *n) {
 
   printf("\nAgrege el contenido del nodo: ");
 
-  fgets(n -> data, 20, stdin);
+  scanf(" %s", n->data);
 }
