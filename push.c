@@ -4,7 +4,7 @@ char * push(Node **front, Node **rear, int *count) {
   Node *newnode = NULL;
 
   if (*front == NULL && *rear == NULL) {
-    printf("Se agrega el primer elemento\n");
+    printf("\nSe agrega el primer elemento");
 
     newnode = (Node *)malloc(sizeof(Node));
 
@@ -12,38 +12,42 @@ char * push(Node **front, Node **rear, int *count) {
     (*rear) = newnode;
 
     (*front) -> next = (*rear);
-    makeLiksToPush(rear, newnode);
+    (*rear) -> next = (*front);
 
     addContent(*rear);
 
     *count = *count + 1;
 
   } else if (*count == MAX) {
-    printf("La cola esta llena, no puedes agragar otro elemento\n\n");
+    printf("\nLa cola esta llena, no puedes agragar otro elemento\n\n");
+    return NULL;
 
   } else {
-    printf("Se agrega un elemento mas a la lista\n");
+    printf("\nSe agrega un elemento mas a la lista");
 
     newnode = (Node *)malloc(sizeof(Node));
 
-    (*rear) = newnode;
-    makeLiksToPush(rear, newnode);
+    makeLiksToPush(rear, front, newnode);
 
     addContent(*rear);
 
     *count = *count + 1;
   }
 
-  printf("\nDireccion de memoria adentro: %p, %p\n", front, rear);
-
   return (*rear)->data;
 }
 
-void makeLiksToPush(Node **rear, Node *newndode) {
+void makeLiksToPush(Node **rear, Node **front, Node *newnode) {
   Node *aux = NULL;
 
+    //Guardo el antiguo contenido de rear
   aux = (*rear);
-  aux -> next = newndode;
+    //Actualizo rear
+  (*rear) = newnode;
+    //Apunto el antiguo rear al nuevo
+  aux -> next = (*rear);
+    //apunto en rear next al front para crear circularidad
+  (*rear) -> next = (*front);
 }
 
 void addContent(Node *n) {
