@@ -6,39 +6,43 @@ int main(void) {
   char *content = NULL;
   int count = 0;
 
-  printf("Circular queue\n");
+  printf("Circular queue con ocho elementos\n");
   
   
   int choice;
   do {
-    printf("\n\t1. Agregar un elemento");
-    printf("\n\t2. Acceder a un elemento");
-    printf("\n\t3. Imprimir la lista");
-    printf("\n\t0. Salir");
-    printf("\nSu eleccion: ");
-    scanf(" %d", &choice);
+    choice = runMenu();
 
     switch (choice) {
       case 1:
+        printf("\n\t- Pushear un elemento a la lista");
         content = push(&front, &rear, &count);
 
         if (content != NULL) {
-          printf("Agregaste un elemento con el contenido: %s\n\n",
+          printf("\nAgregaste un elemento con el contenido: %s\n\n",
             content);
+          //Almacenar dir. de contendios en un array para luego liberar
         }
       break;
 
-      // case 2:
-      //   content = pop(front, rear, &count);
+      case 2:
+        printf("\n\t- Acceder a un elemento de la lista");
+        content = pop(&front, &rear, &count);
 
-      //   if (content != NULL) {
-      //     printf("Accediste a un elemento con el contenido: %s\n\n",
-      //       rear -> data);
-      //   }
-      // break;
+        if (content != NULL) {
+          printf("\nAccediste a un elemento con el contenido: %s\n\n",
+            content);
+          //Almacenar dir. de contendios en un array para luego liberaras
+        }
+      break;
 
       case 3:
+        printf("\n\t- Listar los elementos de la lista");
         printList(front);
+      break;
+
+      case 0:
+        printf("\n\t- Salir del programa\n");
       break;
     
       default:
@@ -48,24 +52,4 @@ int main(void) {
   } while (choice != 0);
 
   return EXIT_SUCCESS;
-}
-
-void printList(Node *front) {
-  Node *current = front;
-
-  printf("\nImprimir los elementos de la lista circular");
-  if (front == NULL) {
-    printf("\nLa lista esta vacia\n");
-  } else {
-    int count = 0;
-    
-    do {
-      printf("\n%d. El contenido es: %s", count, current->data);
-
-      current = current -> next;
-      count++;
-    } while (current != front);
-  }
-
-  printf("\n\n");
 }
