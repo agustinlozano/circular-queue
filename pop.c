@@ -19,10 +19,8 @@ char * pop(Node **front, Node **rear, int *count) {
   } else {
       //Accdedemos al primer elemento
     content = (*front) -> data;
-
       //Guardamos la direccion del front
     Node *aux = (*front);
-    
       //Actualizamos el front
     (*front) = (*front) -> next;
       //actualizo la circularidad
