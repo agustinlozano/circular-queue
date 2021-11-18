@@ -10,6 +10,10 @@ typedef struct node {
   struct node *next;
 } Node;
 
+typedef struct lchar {
+  char *data;
+} Lchar;
+
 #define MAX 8
 
 /* funcion push */
@@ -25,5 +29,10 @@ void printList(Node *front);
 
 /* menu */
 int runMenu(void);
+
+/* content lists & tools */
+void freeAll(Lchar contentList[], int length);
+  void initContentList(Lchar contentlist[]);
+  void printContentList(Lchar contentlist[]);
 
 #endif
