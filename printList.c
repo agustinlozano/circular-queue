@@ -8,7 +8,6 @@ void printList(Node *front) {
 
   } else {
     int count = 0;
-    
     do {
       printf("\n%d. El contenido es: %s", count+1, current->data);
 
@@ -16,6 +15,5 @@ void printList(Node *front) {
       count++;
     } while (current != front);
   }
-
   printf("\n");
 }
